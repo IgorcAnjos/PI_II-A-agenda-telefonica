@@ -1,0 +1,20 @@
+# Maven
+target/
+*.class
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.eclipse
+
+# Banco — nunca commitar dados do PostgreSQL
+volume/postgres/
+
+# Dump de entrega — gerado via /dump, não commitar o binário
+# (commitar apenas quando for o entregável final)
+#dump.sql
+
+# OS
+.DS_Store
+Thumbs.db

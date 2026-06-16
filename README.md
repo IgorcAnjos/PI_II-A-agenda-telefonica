@@ -29,7 +29,7 @@ docker run -d \
 
 ## Restaurar o banco de dados
 
-O arquivo `dump.sql` está na raiz deste projeto. Ele contém o schema completo e os dados de exemplo (3 usuários, 10 contatos).
+O arquivo `database.sql` está na raiz deste projeto. Ele contém o schema completo e os dados de exemplo (3 usuários, 10 contatos).
 
 **Com psql (PostgreSQL local):**
 
@@ -39,13 +39,13 @@ psql -U postgres -c "CREATE USER agenda WITH PASSWORD 'agenda123';"
 psql -U postgres -c "CREATE DATABASE agenda_db OWNER agenda;"
 
 # Restaurar
-psql -U agenda -d agenda_db < dump.sql
+psql -U agenda -d agenda_db < database.sql
 ```
 
 **Com Docker:**
 
 ```bash
-docker exec -i agenda-postgres psql -U agenda -d agenda_db < dump.sql
+docker exec -i agenda-postgres psql -U agenda -d agenda_db < database.sql
 ```
 
 **Com pgAdmin:**
@@ -58,9 +58,9 @@ docker exec -i agenda-postgres psql -U agenda -d agenda_db < dump.sql
 3. Crie o banco `agenda_db`:
    - Clique com o botão direito em **Databases → Create → Database**
    - Database: `agenda_db` · Owner: `agenda`
-4. Execute o dump via Query Tool:
+4. Execute o script via Query Tool:
    - Clique com o botão direito em `agenda_db` → **Query Tool**
-   - No Query Tool: **File → Open** → selecione o arquivo `dump.sql`
+   - No Query Tool: **File → Open** → selecione o arquivo `database.sql`
    - Clique em **Execute / Refresh (F5)** para rodar o script
 5. Verifique: em **Schemas → public → Tables** devem aparecer `usuarios` e `contatos`
 
@@ -101,7 +101,7 @@ java -jar target/agenda.jar
 
 ## Usuários e dados de exemplo
 
-Os seguintes usuários já estão incluídos no `dump.sql`:
+Os seguintes usuários já estão incluídos no `database.sql`:
 
 | Nome         | Email               | Senha     | Contatos |
 |--------------|---------------------|-----------|----------|
@@ -242,12 +242,12 @@ com.agenda
 
 ---
 
-## Gerar novo dump (se necessário)
+## Sobre o database.sql
 
-```bash
-# Com Docker
-docker exec agenda-postgres pg_dump -U agenda --clean --if-exists agenda_db > dump.sql
+O `database.sql` é uma cópia do script `sql/init.sql` do workspace — o mesmo script
+que o Docker Compose executa automaticamente para inicializar o container do
+PostgreSQL. Ele cria o schema do zero (extensão `pgcrypto`, tabelas `usuarios` e
+`contatos`, índices) e popula com os 3 usuários e 10 contatos de exemplo.
 
-# Com psql local
-pg_dump -U agenda --clean --if-exists agenda_db > dump.sql
-```
+Se o `sql/init.sql` for alterado, copie o conteúdo atualizado para `database.sql`
+para manter os dois sincronizados.

@@ -2,8 +2,6 @@
 -- PostgreSQL database dump
 --
 
-\restrict ykjv0NihGwHSbk3qdMBDCDwQvYc849PT2plzoVltvdyUHleZCE9VnkbkcMsl6Xv
-
 -- Dumped from database version 16.14 (Debian 16.14-1.pgdg12+1)
 -- Dumped by pg_dump version 16.14 (Debian 16.14-1.pgdg12+1)
 
@@ -251,6 +249,4 @@ GRANT ALL ON SCHEMA public TO agenda;
 --
 -- PostgreSQL database dump complete
 --
-
-\unrestrict ykjv0NihGwHSbk3qdMBDCDwQvYc849PT2plzoVltvdyUHleZCE9VnkbkcMsl6Xv
 

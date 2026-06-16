@@ -48,6 +48,22 @@ psql -U agenda -d agenda_db < dump.sql
 docker exec -i agenda-postgres psql -U agenda -d agenda_db < dump.sql
 ```
 
+**Com pgAdmin:**
+
+1. Abra o pgAdmin e conecte-se ao servidor PostgreSQL
+   - Host: `localhost` · Porta: `5432` · Usuário: `postgres` (ou seu superusuário)
+2. Crie o usuário `agenda`:
+   - Clique com o botão direito em **Login/Group Roles → Create → Login/Group Role**
+   - Name: `agenda` · Password: `agenda123` · aba **Privileges**: marque **Can login**
+3. Crie o banco `agenda_db`:
+   - Clique com o botão direito em **Databases → Create → Database**
+   - Database: `agenda_db` · Owner: `agenda`
+4. Execute o dump via Query Tool:
+   - Clique com o botão direito em `agenda_db` → **Query Tool**
+   - No Query Tool: **File → Open** → selecione o arquivo `dump.sql`
+   - Clique em **Execute / Refresh (F5)** para rodar o script
+5. Verifique: em **Schemas → public → Tables** devem aparecer `usuarios` e `contatos`
+
 ---
 
 ## Configuração da conexão
